@@ -92,7 +92,7 @@ const SignIn = () => {
             // isLoading={loading}
             className="h-12 w-full rounded-2xl bg-violet-600 text-white hover:bg-violet-500"
           >
-            Create Account
+            Sign In
           </Button>
         </form>
 

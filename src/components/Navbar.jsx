@@ -12,7 +12,7 @@ const Navbar = () => {
   
   const {data:session,isPending} = useSession();
   const user = session?.user;
-  console.log(user,"Navbar",isPending);
+  // console.log(user,"Navbar",isPending,session);
 
 
   const navItems = [
@@ -45,11 +45,11 @@ const Navbar = () => {
 
           <div className="leading-none">
             <h1 className="text-lg font-bold tracking-tight text-white">
-              Programming
+              Hire
             </h1>
 
             <p className="text-sm font-medium text-white/80">
-              Hero
+              Loop
             </p>
           </div>
         </Link>

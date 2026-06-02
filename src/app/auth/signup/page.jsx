@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
+import {Description, Label, Radio, RadioGroup} from "@heroui/react";
 import { Button, Input } from "@heroui/react";
 
 import {
@@ -21,7 +21,9 @@ import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
-    const route = useRouter()
+  const [role,setRole] = useState("seeker");
+
+  const route = useRouter();
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -55,6 +57,7 @@ const SignupPage = () => {
             password,
             name,
             image,
+            role
         });
 
         if (error) {
@@ -198,6 +201,33 @@ const SignupPage = () => {
               required
               className={"text-sm text-white placeholder:text-white/40"}
             />
+          </div>
+          {/* Role selection */}
+          <div className="flex flex-col gap-4">
+            <Label>Subscription plan</Label>
+            <RadioGroup 
+              defaultValue="seeker" 
+              name="role" 
+              orientation="horizontal"
+              onChange={value => setRole(value)}
+            >
+              <Radio value="seeker">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Job Seeker</Label>
+                </Radio.Content>
+              </Radio>
+              <Radio value="recruiter">
+                <Radio.Control>
+                  <Radio.Indicator />
+                </Radio.Control>
+                <Radio.Content>
+                  <Label>Recruiter</Label>
+                </Radio.Content>
+              </Radio>
+            </RadioGroup>
           </div>
 
           {/* BUTTON */}

@@ -32,11 +32,11 @@ const Footer = () => {
 
               <div className="leading-none">
                 <h1 className="text-lg font-bold">
-                  Programming
+                  Hire
                 </h1>
 
                 <p className="text-sm text-white/80">
-                  Hero
+                  Loop
                 </p>
               </div>
             </Link>
