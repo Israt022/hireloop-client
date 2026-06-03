@@ -17,6 +17,7 @@ import {
 } from "@heroui/react";
 import { Briefcase, Globe } from "@gravity-ui/icons";
 import { redirect } from "next/navigation";
+import { createJob } from "@/lib/actions/jobs";
 
 export default function PostJobPage() {
     // Mock configuration for recruiter's authenticated state
@@ -65,7 +66,15 @@ export default function PostJobPage() {
             status: "active",
             isPubliclyVisible: true,
         };
-        console.log(payload);
+        
+        const res = await createJob(payload);
+
+        if(res.insertedId){
+            toast.success("Job Posted successfully");
+            e.target.reset();
+            setIsRemote(false);
+            redirect('/dashboard/recruiter')
+        }
 
     };
 
