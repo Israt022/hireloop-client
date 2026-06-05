@@ -2,13 +2,13 @@
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const createJob = async(newJobData)=>{
-    const res = await fetch(`${baseUrl}/api/jobs`,{
+export const createCompany = async(newCompanyData)=>{
+    const res = await fetch(`${baseUrl}/api/companies`,{
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
         },
-        body : JSON.stringify(newJobData)
+        body : JSON.stringify(newCompanyData)
     }
     );
 

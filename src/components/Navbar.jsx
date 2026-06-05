@@ -18,11 +18,11 @@ const Navbar = () => {
   const navItems = [
     {
       label: 'Browse Jobs',
-      href: '/',
+      href: '/jobs',
     },
     {
-      label: 'Company',
-      href: '/',
+      label: 'Companies',
+      href: '/companies',
     },
     {
       label: 'Pricing',
