@@ -15,13 +15,16 @@ import {
 
 import toast from "react-hot-toast";
 import { signUp } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // import { authClient } from "@/lib/auth-client";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
   const [role,setRole] = useState("seeker");
+
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirect') || "/";
 
   const route = useRouter();
   const handleSignup = async (e) => {
@@ -70,7 +73,7 @@ const SignupPage = () => {
 
         form.reset();
 
-        route.push("/auth/signin");
+        route.push(redirectTo);
 
     } catch (error) {
         toast.error(
@@ -264,7 +267,7 @@ const SignupPage = () => {
         <p className="mt-6 text-center text-sm text-white/50">
           Already have an account?{" "}
           <Link
-            href="/auth/signin"
+            href={`/auth/signin?redirect=${redirectTo}`}
             className="font-medium text-violet-400 hover:text-violet-300"
           >
             Sign In

@@ -26,7 +26,7 @@ const Navbar = () => {
     },
     {
       label: 'Pricing',
-      href: '/',
+      href: '/plans',
     },
   ];
   const handleLogout = async()=>{
