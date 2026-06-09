@@ -8,6 +8,7 @@ import Link from 'next/link';
 // Importing a few Gravity UI icons to make it look clean and consistent
 import { ShieldExclamation, CircleInfo, Rocket } from '@gravity-ui/icons';
 import { getApplicationsById } from '@/lib/api/applications';
+import { getPlanById } from '@/lib/api/plans';
 // import { getPlanById } from '@/lib/api/plans';
 
 const ApplyPage = async ({ params }) => {
@@ -44,11 +45,13 @@ const ApplyPage = async ({ params }) => {
 
     const applications = await getApplicationsById(user.id);
 
+    const plan = await getPlanById(user?.plan || 'seeker_free');
+    console.log(plan,"From apply job");
     // const plan = await getPlanById(user?.plan || 'seeker_free')
-    const plan = {
-        name : 'Free',
-        maxApplicationsPerMonth: 3,
-    }
+    // const plan = {
+    //     name : 'Free',
+    //     maxApplicationsPerMonth: 3,
+    // }
     
     const job = await getJobById(id);
 

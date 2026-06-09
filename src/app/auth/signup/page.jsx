@@ -51,6 +51,7 @@ const SignupPage = () => {
         "Password must be at least 6 characters"
       );
     }
+    const plan = role === 'seeker' ? 'seeker_free' : 'recruiter_free';
 
     try {
         setLoading(true);
@@ -60,8 +61,10 @@ const SignupPage = () => {
             password,
             name,
             image,
-            role
+            role,
+            plan
         });
+        console.log(data,"From signup");
 
         if (error) {
             return toast.error(error.message);
@@ -212,7 +215,9 @@ const SignupPage = () => {
               defaultValue="seeker" 
               name="role" 
               orientation="horizontal"
-              onChange={value => setRole(value)}
+              onChange={(value) => {
+                console.log(value);
+                setRole(value)}}
             >
               <Radio value="seeker">
                 <Radio.Control>
