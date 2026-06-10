@@ -1,5 +1,8 @@
 'use server'
 
+import { revalidatePath } from "next/cache";
+import { serverMutation } from "../core/server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const createCompany = async(newCompanyData)=>{
@@ -13,4 +16,10 @@ export const createCompany = async(newCompanyData)=>{
     );
 
     return res.json();
+}
+
+export const updateCompany = async(id, data) =>{
+    const result = serverMutation(`/api/companies/${id}`,data, 'PATCH');
+    revalidatePath('/dashboard/admin/companies');
+    return result;
 }

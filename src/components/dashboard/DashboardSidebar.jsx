@@ -1,21 +1,52 @@
-import {Bell, Envelope, Gear, House, LayoutSideContentLeft, Magnifier, Person} from "@gravity-ui/icons";
+import {Bell, Bookmark, Briefcase, CreditCard, Envelope, FileText, Gear, House, LayoutSideContentLeft, Magnifier, Person} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
 import Link from "next/link";
+import { Building, Users } from "lucide-react";
+import { getUserSession } from "@/lib/core/session";
 
-const DashboardSidebar = () => {
-    const navItems = [
-    {icon: House, label: "Home", path:"/dashboard/recruiter"},
-    {icon: Magnifier, label: "Jobs",path:'/dashboard/recruiter/jobs'},
-    {icon: Bell, label: "Post A Job", path:'/dashboard/recruiter/jobs/new'},
-    {icon: Envelope, label: "Company Profile",path:'/dashboard/recruiter/company'},
-    {icon: Person, label: "Profile", path:"/dashboard/recruiter"},
-    {icon: Gear, label: "Settings", path:"/dashboard/recruiter"},
-  ];
+const DashboardSidebar = async() => {
+    const user = await getUserSession()
+
+    const recruiterNavLinks = [
+        { icon: House, href: "/dashboard/recruiter", label: "Home" },
+        { icon: Magnifier, href: "/dashboard/recruiter/jobs", label: "Jobs" },
+        { icon: Bell, href: "/dashboard/recruiter/jobs/new", label: "Post A Job" },
+        { icon: Briefcase, href: "/dashboard/recruiter/company", label: "Company Profile" },
+        { icon: Envelope, href: "/messages", label: "Messages" },
+        { icon: Person, href: "/profile", label: "Profile" },
+        { icon: Gear, href: "/settings", label: "Settings" },
+    ]
+
+    const seekerNavLinks = [
+        { icon: House, href: "/dashboard/seeker", label: "Dashboard" },
+        { icon: Magnifier, href: "/dashboard/seeker/jobs", label: "Jobs" },
+        { icon: Bookmark, href: "/dashboard/seeker/saved-jobs", label: "Saved Jobs" },
+        { icon: FileText, href: "/dashboard/seeker/applications", label: "Applications" },
+        { icon: CreditCard, href: "/dashboard/seeker/billing", label: "Billing" },
+        { icon: Gear, href: "/settings", label: "Settings" },
+    ];
+
+    const adminNavLinks = [
+        { icon: House, href: "/dashboard/admin", label: "Dashboard" },
+        { icon: Users, href: "/dashboard/admin/users", label: "Users" },
+        { icon: Building, href: "/dashboard/admin/companies", label: "Companies" },
+        { icon: Briefcase, href: "/dashboard/admin/jobs", label: "Jobs" },
+        { icon: CreditCard, href: "/dashboard/admin/payments", label: "Payments" },
+        { icon: Gear, href: "/dashboard/admin/settings", label: "Settings" },
+    ];
+
+    const navLinksMap = {
+        seeker : seekerNavLinks,
+        recruiter : recruiterNavLinks,
+        admin : adminNavLinks
+    }
+    const navItems = navLinksMap[user?.role  || 'seeker']
+
   const navContent = <nav className="flex flex-col gap-1">
                         {navItems.map((item) => (
                         <Link
                             key={item.label}
-                            href={item.path}
+                            href={item.href}
                             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
                             type="button"
                         >

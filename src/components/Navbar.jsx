@@ -29,6 +29,21 @@ const Navbar = () => {
       href: '/plans',
     },
   ];
+
+  const dashboardLinks = {
+    seeker : '/dashboard/seeker',
+    recruiter : '/dashboard/recruiter',
+    admin : '/dashboard/admin',
+  }
+
+  if(user?.email){
+    navItems.push(
+      {
+        label : 'Dashboard',
+        href : dashboardLinks[user?.role || 'seeker']
+      }
+    )
+  }
   const handleLogout = async()=>{
     await signOut();
   }
